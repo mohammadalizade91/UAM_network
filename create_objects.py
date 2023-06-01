@@ -42,7 +42,7 @@ def create_vertiport(file_name: str, aircraft_info: dict) -> (list, int):
             pads = []
             aircrafts = []
             i += 1
-            if not np.isnan(data_dict['PadDirection'][index]):
+            if data_dict['Pad'][index]:
                 pad_obj = Pad(i, data_dict['Pad'][index] if type(data_dict['Pad'][index]) == str else 'pad with no name')
                 pads.append(pad_obj)
                 i += 1
@@ -51,7 +51,7 @@ def create_vertiport(file_name: str, aircraft_info: dict) -> (list, int):
                     aircrafts.append(Aircraft(i, data_dict['AircraftID'][index], None, 'ready', [], aircraft_info[int(data_dict['AircraftID'][index])]['capacity']))
                     i += 1
         elif np.isnan(data_dict['Name'][index]):
-            if not np.isnan(data_dict['PadDirection'][index]):
+            if data_dict['Pad'][index]:
                 pad_obj = Pad(i, data_dict['Pad'][index] if type(data_dict['Pad'][index]) == str else 'pad with no name')
                 pads.append(pad_obj)
                 i += 1
